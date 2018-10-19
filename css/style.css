@@ -1,0 +1,7 @@
+.go-center {
+  margin: 0 auto;
+  text-align: center;
+}
+.rounded {
+  border-radius: 4px;
+}
