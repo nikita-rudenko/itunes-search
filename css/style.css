@@ -7,6 +7,26 @@
 }
 
 .search-result {
-  padding-top: 8px;
-  padding-bottom: 24px;
+  cursor: pointer;
+}
+
+.head {
+  padding: 20px;
+  box-sizing: border-box;
+}
+
+.search-item {
+  padding: 20px;
+  box-sizing: border-box;
+}
+
+.panel {
+  padding: 0 18px;
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height 0.2s ease-out;
+}
+
+.output {
+  padding-bottom: 30px;
 }
