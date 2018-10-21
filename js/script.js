@@ -9,12 +9,23 @@ searchbtn.addEventListener('click', findSong);
 function findSong() {
   let inputValue = searchInput.value;
   inputValue = inputValue.replace(/\s/gi, '+');
-  fetch(`https://itunes.apple.com/search?term=${inputValue}&limit=5`)
-    .then(response => response.json())
-    .then(json => appends(json));
+  fetch(`https://itunes.apple.com/search?term=${inputValue}&limit=5&callback`, {
+    mode: 'cors',
+    headers: {
+      'Access-Control-Allow-Origin': '*'
+    }
+  })
+    .then(function(response) {
+      if (!response.ok) {
+        return Promise.reject('some reason');
+      }
+
+      return response.json();
+    })
+    .then(json => showResults(json));
 }
 
-function appends(json) {
+function showResults(json) {
   console.log(json.results);
   searchOtput.innerHTML = '';
   json.results.forEach((item, key) => {
@@ -37,11 +48,12 @@ function appends(json) {
       ${item.primaryGenreName}
     </div>
     <div class="column has-text-centered is-1">
-      <span id="icon1" class="tag is-rounded is-large has-background-dark has-text-white">+</span>
+      <span class="tag is-rounded is-large has-background-dark has-text-white">+</span>
     </div>
   </div>
   <div class="panel">
-    <h2 class="is-size-4">The Beatles - Here Comes The Sun <span><i class="fas fa-music"></i></span> </h2>
+    <h2 class="is-size-4">${item.artistName} - ${item.trackName} 
+    <span><i class="fas fa-music"></i></span> </h2>
     <div class="columns">
       <div class="column">
         <ul class="search-item">
@@ -67,25 +79,16 @@ function appends(json) {
 </div>
 </section>`;
   });
+
+  for (i = 0; i < acc.length; i++) {
+    acc[i].addEventListener('click', function() {
+      this.classList.toggle('active');
+      const panel = this.nextElementSibling;
+      if (panel.style.maxHeight) {
+        panel.style.maxHeight = null;
+      } else {
+        panel.style.maxHeight = panel.scrollHeight + 'px';
+      }
+    });
+  }
 }
-
-// for (let i = 1; i < acc.length; i++) {
-//   acc[i].addEventListener('click', function() {
-//     this.classList.toggle('active');
-//     let io = acc[i];
-//     let icon = document.querySelector(`${io}`);
-//     console.log(io);
-
-//     if (this.classList.contains('active')) {
-//       icon.innerText = '−';
-//     } else {
-//       icon.innerText = '+';
-//     }
-//     const panel = this.nextElementSibling;
-//     if (panel.style.maxHeight) {
-//       panel.style.maxHeight = null;
-//     } else {
-//       panel.style.maxHeight = panel.scrollHeight + 'px';
-//     }
-//   });
-// }
