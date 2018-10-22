@@ -9,17 +9,15 @@ searchbtn.addEventListener('click', findSong);
 function findSong() {
   let inputValue = searchInput.value;
   inputValue = inputValue.replace(/\s/gi, '+');
-  fetch(`https://itunes.apple.com/search?term=${inputValue}&limit=5&callback`, {
-    mode: 'cors',
-    headers: {
-      'Access-Control-Allow-Origin': '*'
-    }
-  })
-    .then(function(response) {
-      if (!response.ok) {
-        return Promise.reject('some reason');
-      }
+  console.log(inputValue);
+  let url = `https://itunes.apple.com/search?term=${inputValue}&limit=5&entity=musicTrack`;
 
+  fetch(url)
+    .then(function(response) {
+      if (response.status !== 200) {
+        console.log(response.status);
+        return;
+      }
       return response.json();
     })
     .then(json => showResults(json));
