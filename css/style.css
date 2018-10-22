@@ -1,13 +1,9 @@
-.go-center {
+.input-center {
   margin: 0 auto;
   text-align: center;
 }
 .rounded {
   border-radius: 4px;
-}
-
-.search-result {
-  cursor: pointer;
 }
 
 .head {
@@ -16,6 +12,7 @@
 }
 
 .search-item {
+  cursor: pointer;
   padding: 20px;
   box-sizing: border-box;
 }
@@ -27,6 +24,6 @@
   transition: max-height 0.2s ease-out;
 }
 
-.output {
+#output {
   padding-bottom: 30px;
 }
