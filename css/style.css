@@ -24,6 +24,10 @@
   transition: max-height 0.2s ease-out;
 }
 
+.show {
+  max-height: 180px;
+}
+
 #output {
   padding-bottom: 30px;
 }

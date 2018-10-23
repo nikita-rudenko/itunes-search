@@ -1,4 +1,5 @@
 const acc = document.getElementsByClassName('columns');
+let show = document.getElementsByClassName('show');
 const searchbtn = document.getElementById('search-btn');
 const searchInput = document.getElementById('input');
 let searchOtput = document.getElementById('output');
@@ -27,7 +28,7 @@ function showResults(json) {
   console.log(json.results);
   searchOtput.innerHTML = '';
   json.results.forEach((item, key) => {
-    searchOtput.innerHTML += `<div class="search-item container has-background-light rounded">
+    searchOtput.innerHTML += `<div id="item${key}" class="search-item container has-background-light rounded">
   <div class="columns is-vcentered">
     <div class="column has-text-centered is-2">
       <img src=${item.artworkUrl100}
@@ -49,7 +50,7 @@ function showResults(json) {
       <span class="tag is-rounded is-large has-background-dark has-text-white">+</span>
     </div>
   </div>
-  <div class="panel">
+  <div id="${key}" class="panel">
     <h2 class="is-size-4">${item.artistName} - ${item.trackName} 
     <span><i class="fas fa-music"></i></span> </h2>
     <div class="columns">
@@ -83,13 +84,11 @@ function showResults(json) {
 
   for (i = 0; i < acc.length; i++) {
     acc[i].addEventListener('click', function() {
-      this.classList.toggle('active');
-      const panel = this.nextElementSibling;
-      if (panel.style.maxHeight) {
-        panel.style.maxHeight = null;
-      } else {
-        panel.style.maxHeight = panel.scrollHeight + 'px';
+      if (show[0]) {
+        show[0].classList.toggle('show');
       }
+      const panel = this.nextElementSibling;
+      panel.classList.toggle('show');
     });
   }
 }
