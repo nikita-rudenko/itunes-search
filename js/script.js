@@ -1,9 +1,9 @@
-const acc = document.getElementsByClassName('header');
+const mainInfo = document.getElementsByClassName('main-info');
 let show = document.getElementsByClassName('show');
 let active = document.getElementsByClassName('active');
 const searchbtn = document.getElementById('search-btn');
 const searchInput = document.getElementById('input');
-let searchOtput = document.getElementById('output');
+let searchOutput = document.getElementById('output');
 let i;
 
 searchbtn.addEventListener('click', findSong);
@@ -11,7 +11,6 @@ searchbtn.addEventListener('click', findSong);
 function findSong() {
   let inputValue = searchInput.value;
   inputValue = inputValue.replace(/\s/gi, '+');
-  console.log(inputValue);
   let url = `https://itunes.apple.com/search?term=${inputValue}&limit=10&entity=musicTrack`;
 
   fetch(url)
@@ -26,13 +25,12 @@ function findSong() {
 }
 
 function showResults(json) {
-  console.log(json.results);
-  searchOtput.innerHTML = '';
+  searchOutput.innerHTML = '';
   json.results.forEach((item, key) => {
-    searchOtput.innerHTML += `<div id="item${key}" class="search-item container 
+    searchOutput.innerHTML += `<div id="item${key}" class="search-result container 
     ${key % 2 === 0 ? 'has-background-light' : ''} 
     rounded">
-  <div class="header columns is-vcentered">
+  <div class="main-info columns is-vcentered">
     <div class="column has-text-centered is-2">
       <img src=${item.artworkUrl100}
         alt="cover">
@@ -50,10 +48,10 @@ function showResults(json) {
       ${item.primaryGenreName}
     </div>
     <div class="column has-text-centered is-1">
-      <span id="icon${key}" class="tag is-rounded is-large has-background-dark has-text-white">+</span>
+      <span class="tag is-rounded is-large has-background-dark has-text-white">+</span>
     </div>
   </div>
-  <div class="panel">
+  <div class="additional-info">
     <h2 class="is-size-4">${item.artistName} - ${item.trackName} 
     <span><i class="fas fa-music"></i></span> </h2>
     <div class="columns">
@@ -85,18 +83,19 @@ function showResults(json) {
 </section>`;
   });
 
-  for (i = 0; i < acc.length; i++) {
-    acc[i].addEventListener('click', function() {
+  for (i = 0; i < mainInfo.length; i++) {
+    mainInfo[i].addEventListener('click', function() {
       const panel = this.nextElementSibling;
 
-      const button = this.childNodes[11];
-      const sign = button.childNodes[1];
+      // looking for the +/- switch of this particular mainInfo panel
+      const sign = this.childNodes[11].childNodes[1];
       sign.textContent = '+';
+
       if (this.classList.contains('active')) {
         this.classList.remove('active');
       }
 
-      collapseOtherTabs();
+      collapseOtherPanels();
 
       if (!this.classList.contains('active')) {
         sign.textContent = '-';
@@ -113,12 +112,15 @@ function millisToMinutesAndSeconds(millis) {
   return minutes + ':' + (seconds < 10 ? '0' : '') + seconds;
 }
 
-function collapseOtherTabs() {
+function collapseOtherPanels() {
+  // if we have an item with the class .show
   if (show[0]) {
     show[0].classList.remove('show');
-    const button = active[0].childNodes[11];
-    const sign = button.childNodes[1];
-    sign.textContent = '+';
+    if (active[0]) {
+      const sign = active[0].childNodes[11].childNodes[1];
+      sign.textContent = '+';
+    }
+
     active[0].classList.remove('active');
   }
 }

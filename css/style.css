@@ -2,30 +2,32 @@
   margin: 0 auto;
   text-align: center;
 }
+
 .rounded {
   border-radius: 4px;
 }
 
-.head {
+.header {
   padding: 20px;
   box-sizing: border-box;
 }
 
-.search-item {
+.search-result {
   cursor: pointer;
   padding: 20px;
   box-sizing: border-box;
 }
 
-.panel {
+.additional-info {
   padding: 0 18px;
   max-height: 0;
   overflow: hidden;
-  transition: max-height 0.2s ease-out;
+  transition: max-height 0.5s ease-out;
 }
 
 .show {
   max-height: 280px;
+  transition: max-height 0.5s ease-out;
 }
 
 #output {
