@@ -1,5 +1,6 @@
 const acc = document.getElementsByClassName('columns');
 let show = document.getElementsByClassName('show');
+let active = document.getElementsByClassName('active');
 const searchbtn = document.getElementById('search-btn');
 const searchInput = document.getElementById('input');
 let searchOtput = document.getElementById('output');
@@ -84,10 +85,12 @@ function showResults(json) {
 
   for (i = 0; i < acc.length; i++) {
     acc[i].addEventListener('click', function() {
-      collapseOtherTabs();
       const panel = this.nextElementSibling;
+      collapseOtherTabs();
       this.classList.toggle('active');
-      panel.classList.toggle('show');
+      if (this.className.includes('active')) {
+        panel.classList.toggle('show');
+      }
     });
   }
 }
@@ -99,7 +102,8 @@ function millisToMinutesAndSeconds(millis) {
 }
 
 function collapseOtherTabs() {
-  if (show[0]) {
+  if (show[0] && active[0]) {
     show[0].classList.toggle('show');
+    active[0].classList.toggle('active');
   }
 }
