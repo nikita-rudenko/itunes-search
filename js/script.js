@@ -29,7 +29,9 @@ function showResults(json) {
   console.log(json.results);
   searchOtput.innerHTML = '';
   json.results.forEach((item, key) => {
-    searchOtput.innerHTML += `<div id="item${key}" class="search-item container has-background-light rounded">
+    searchOtput.innerHTML += `<div id="item${key}" class="search-item container 
+    ${key % 2 === 0 ? 'has-background-light' : ''} 
+    rounded">
   <div class="columns is-vcentered">
     <div class="column has-text-centered is-2">
       <img src=${item.artworkUrl100}
