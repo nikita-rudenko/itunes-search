@@ -73,7 +73,7 @@ function showResults(json) {
       <div class="column">
         <ul class="search-item">
           <li>
-            <strong>Track durarion:</strong> 
+            <strong>Track duration:</strong> 
             ${millisToMinutesAndSeconds(item.trackTimeMillis)} min
           </li>
           <li><strong>Track price:</strong> ${item.trackPrice} USD</li>
