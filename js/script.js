@@ -10,7 +10,7 @@ function findSong() {
   let inputValue = searchInput.value;
   inputValue = inputValue.replace(/\s/gi, '+');
   console.log(inputValue);
-  let url = `https://itunes.apple.com/search?term=${inputValue}&limit=5&entity=musicTrack`;
+  let url = `https://itunes.apple.com/search?term=${inputValue}&limit=10&entity=musicTrack`;
 
   fetch(url)
     .then(function(response) {
@@ -56,20 +56,23 @@ function showResults(json) {
       <div class="column">
         <ul class="search-item">
           <li>
-            <p><strong>Collection:</strong> Abbey Road</p>
+            <p><strong>Collection:</strong> ${item.collectionName}</p>
           </li>
           <li>
-            <p><strong>Track Count:</strong> 17</p>
+            <p><strong>Track Count:</strong> ${item.trackCount}</p>
           </li>
           <li>
-            <p><strong>Price:</strong> 12.99 USD</p>
+            <p><strong>Price:</strong> ${item.collectionPrice} USD</p>
           </li>
         </ul>
       </div>
       <div class="column">
         <ul class="search-item">
-          <li><strong>Track durarion:</strong> 3:06 min</li>
-          <li><strong>Track price:</strong> 1.29 USD</li>
+          <li>
+            <strong>Track durarion:</strong> 
+            ${millisToMinutesAndSeconds(item.trackTimeMillis)} min
+          </li>
+          <li><strong>Track price:</strong> ${item.trackPrice} USD</li>
         </ul>
       </div>
     </div>
@@ -89,4 +92,10 @@ function showResults(json) {
       }
     });
   }
+}
+
+function millisToMinutesAndSeconds(millis) {
+  let minutes = Math.floor(millis / 60000);
+  let seconds = ((millis % 60000) / 1000).toFixed(0);
+  return minutes + ':' + (seconds < 10 ? '0' : '') + seconds;
 }
