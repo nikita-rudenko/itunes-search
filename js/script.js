@@ -1,4 +1,4 @@
-const acc = document.getElementsByClassName('columns');
+const acc = document.getElementsByClassName('header');
 let show = document.getElementsByClassName('show');
 let active = document.getElementsByClassName('active');
 const searchbtn = document.getElementById('search-btn');
@@ -32,7 +32,7 @@ function showResults(json) {
     searchOtput.innerHTML += `<div id="item${key}" class="search-item container 
     ${key % 2 === 0 ? 'has-background-light' : ''} 
     rounded">
-  <div class="columns is-vcentered">
+  <div class="header columns is-vcentered">
     <div class="column has-text-centered is-2">
       <img src=${item.artworkUrl100}
         alt="cover">
@@ -88,10 +88,16 @@ function showResults(json) {
   for (i = 0; i < acc.length; i++) {
     acc[i].addEventListener('click', function() {
       const panel = this.nextElementSibling;
+
+      if (this.classList.contains('active')) {
+        this.classList.remove('active');
+      }
+
       collapseOtherTabs();
-      this.classList.toggle('active');
-      if (this.className.includes('active')) {
-        panel.classList.toggle('show');
+
+      if (!this.classList.contains('active')) {
+        panel.classList.add('show');
+        this.classList.add('active');
       }
     });
   }
@@ -104,8 +110,8 @@ function millisToMinutesAndSeconds(millis) {
 }
 
 function collapseOtherTabs() {
-  if (show[0] && active[0]) {
-    show[0].classList.toggle('show');
-    active[0].classList.toggle('active');
+  if (show[0]) {
+    show[0].classList.remove('show');
+    active[0].classList.remove('active');
   }
 }
