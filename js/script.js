@@ -84,10 +84,9 @@ function showResults(json) {
 
   for (i = 0; i < acc.length; i++) {
     acc[i].addEventListener('click', function() {
-      if (show[0]) {
-        show[0].classList.toggle('show');
-      }
+      collapseOtherTabs();
       const panel = this.nextElementSibling;
+      this.classList.toggle('active');
       panel.classList.toggle('show');
     });
   }
@@ -97,4 +96,10 @@ function millisToMinutesAndSeconds(millis) {
   let minutes = Math.floor(millis / 60000);
   let seconds = ((millis % 60000) / 1000).toFixed(0);
   return minutes + ':' + (seconds < 10 ? '0' : '') + seconds;
+}
+
+function collapseOtherTabs() {
+  if (show[0]) {
+    show[0].classList.toggle('show');
+  }
 }
