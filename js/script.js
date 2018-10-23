@@ -50,10 +50,10 @@ function showResults(json) {
       ${item.primaryGenreName}
     </div>
     <div class="column has-text-centered is-1">
-      <span class="tag is-rounded is-large has-background-dark has-text-white">+</span>
+      <span id="icon${key}" class="tag is-rounded is-large has-background-dark has-text-white">+</span>
     </div>
   </div>
-  <div id="${key}" class="panel">
+  <div class="panel">
     <h2 class="is-size-4">${item.artistName} - ${item.trackName} 
     <span><i class="fas fa-music"></i></span> </h2>
     <div class="columns">
@@ -89,6 +89,9 @@ function showResults(json) {
     acc[i].addEventListener('click', function() {
       const panel = this.nextElementSibling;
 
+      const button = this.childNodes[11];
+      const sign = button.childNodes[1];
+      sign.textContent = '+';
       if (this.classList.contains('active')) {
         this.classList.remove('active');
       }
@@ -96,6 +99,7 @@ function showResults(json) {
       collapseOtherTabs();
 
       if (!this.classList.contains('active')) {
+        sign.textContent = '-';
         panel.classList.add('show');
         this.classList.add('active');
       }
@@ -112,6 +116,9 @@ function millisToMinutesAndSeconds(millis) {
 function collapseOtherTabs() {
   if (show[0]) {
     show[0].classList.remove('show');
+    const button = active[0].childNodes[11];
+    const sign = button.childNodes[1];
+    sign.textContent = '+';
     active[0].classList.remove('active');
   }
 }
