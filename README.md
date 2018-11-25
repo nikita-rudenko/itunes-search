@@ -7,4 +7,4 @@
     - Bulma CSS;
     - FontAwesome icons
 
-## Live: [here](https://nick-rudenko.github.io/itunes-search-API/)
+## Live: [here](https://nick-rudenko.github.io/itunes-search/)
