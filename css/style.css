@@ -33,3 +33,15 @@
 #output {
 	padding-bottom: 30px;
 }
+
+.tag:after {
+	content: '+';
+}
+
+.active .tag:after {
+	content: ' ';
+}
+
+.active .tag:before {
+	content: '\2012';
+}

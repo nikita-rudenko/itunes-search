@@ -44,7 +44,7 @@ function showResults(json) {
       ${item.primaryGenreName}
     </div>
     <div class="column has-text-centered is-1">
-      <span class="tag is-rounded is-large has-background-dark has-text-white">+</span>
+      <span class="tag is-rounded is-large has-background-dark has-text-white"></span>
     </div>
   </div>
   <div class="additional-info">
@@ -87,6 +87,7 @@ function showResults(json) {
 function togglePanel(e) {
 	let show = document.querySelector('.show');
 	let active = document.querySelector('.active');
+	let sign = document.querySelector('.active .tag');
 	const panel = this.nextElementSibling;
 
 	if (active == this && show == panel) {
