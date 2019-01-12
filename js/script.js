@@ -1,11 +1,17 @@
-const searchbtn = document.querySelector('#search-btn');
 const searchInput = document.querySelector('#search-input');
+const searchbtn = document.querySelector('#search-btn');
 const searchResults = document.querySelector('#search-results');
 const resultHeader = document.getElementsByClassName('main-info');
 const categories = document.getElementById('categories');
 const noResults = document.getElementById('no-results');
 
 searchbtn.addEventListener('click', findSong);
+searchInput.addEventListener('keypress', e => {
+	if (e.keyCode == 13) {
+		e.preventDefault();
+		searchbtn.click();
+	}
+});
 
 function findSong() {
 	const searchQuery = searchInput.value.replace(/\s/gi, '+');
