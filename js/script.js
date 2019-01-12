@@ -1,14 +1,13 @@
+const searchbtn = document.querySelector('#search-btn');
+const searchInput = document.querySelector('#search-input');
+const searchResults = document.querySelector('#search-results');
 const mainInfo = document.getElementsByClassName('main-info');
-const searchbtn = document.getElementById('search-btn');
-const searchInput = document.getElementById('input');
-let searchOutput = document.getElementById('output');
 
 searchbtn.addEventListener('click', findSong);
 
 function findSong() {
-	let inputValue = searchInput.value;
-	inputValue = inputValue.replace(/\s/gi, '+');
-	let url = `https://itunes.apple.com/search?term=${inputValue}&limit=10&entity=musicTrack`;
+	const searchQuery = searchInput.value.replace(/\s/gi, '+');
+	const url = `https://itunes.apple.com/search?term=${searchQuery}&limit=10&entity=musicTrack`;
 
 	fetch(url)
 		.then(function(response) {
@@ -22,9 +21,10 @@ function findSong() {
 }
 
 function showResults(json) {
-	searchOutput.innerHTML = '';
+	searchResults.innerHTML = '';
+
 	json.results.forEach((item, key) => {
-		searchOutput.innerHTML += `<div id="item${key}" class="search-result container 
+		searchResults.innerHTML += `<div id="item${key}" class="search-result container 
     ${key % 2 === 0 ? 'has-background-light' : ''} 
     rounded">
   <div class="main-info columns is-vcentered">
@@ -76,7 +76,7 @@ function showResults(json) {
     </div>
   </div>
 </div>
-</section>`;
+</div>`;
 	});
 
 	for (let i = 0; i < mainInfo.length; i++) {
@@ -84,10 +84,9 @@ function showResults(json) {
 	}
 }
 
-function togglePanel(e) {
-	let show = document.querySelector('.show');
+function togglePanel() {
 	let active = document.querySelector('.active');
-	let sign = document.querySelector('.active .tag');
+	let show = document.querySelector('.show');
 	const panel = this.nextElementSibling;
 
 	if (active == this && show == panel) {
@@ -105,7 +104,7 @@ function togglePanel(e) {
 }
 
 function millisToMinutesAndSeconds(millis) {
-	let minutes = Math.floor(millis / 60000);
-	let seconds = ((millis % 60000) / 1000).toFixed(0);
+	const minutes = Math.floor(millis / 60000);
+	const seconds = ((millis % 60000) / 1000).toFixed(0);
 	return minutes + ':' + (seconds < 10 ? '0' : '') + seconds;
 }
