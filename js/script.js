@@ -1,7 +1,9 @@
 const searchbtn = document.querySelector('#search-btn');
 const searchInput = document.querySelector('#search-input');
 const searchResults = document.querySelector('#search-results');
-const mainInfo = document.getElementsByClassName('main-info');
+const resultHeader = document.getElementsByClassName('main-info');
+const categories = document.getElementById('categories');
+const noResults = document.getElementById('no-results');
 
 searchbtn.addEventListener('click', findSong);
 
@@ -22,6 +24,14 @@ function findSong() {
 
 function showResults(json) {
 	searchResults.innerHTML = '';
+
+	if (json.resultCount !== 0) {
+		categories.classList.remove('no-display');
+		noResults.classList.add('no-display');
+	} else {
+		noResults.classList.remove('no-display');
+		categories.classList.add('no-display');
+	}
 
 	json.results.forEach((item, key) => {
 		searchResults.innerHTML += `<div id="item${key}" class="search-result container 
@@ -47,7 +57,7 @@ function showResults(json) {
       <span class="tag is-rounded is-large has-background-dark has-text-white"></span>
     </div>
   </div>
-  <div class="additional-info">
+  <div class="result-details">
     <h2 class="is-size-4">${item.artistName} - ${item.trackName} 
     <span><i class="fas fa-music"></i></span> </h2>
     <div class="columns">
@@ -74,13 +84,11 @@ function showResults(json) {
         </ul>
       </div>
     </div>
-  </div>
-</div>
-</div>`;
+  </div>`;
 	});
 
-	for (let i = 0; i < mainInfo.length; i++) {
-		mainInfo[i].addEventListener('click', togglePanel);
+	for (let i = 0; i < resultHeader.length; i++) {
+		resultHeader[i].addEventListener('click', togglePanel);
 	}
 }
 

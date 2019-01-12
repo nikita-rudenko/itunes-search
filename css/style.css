@@ -12,28 +12,34 @@
 	box-sizing: border-box;
 }
 
-.search-result {
-	cursor: pointer;
-	padding: 20px;
-	box-sizing: border-box;
-}
-
-.additional-info {
-	padding: 0 18px;
-	max-height: 0;
-	overflow: hidden;
-	transition: max-height 0.4s ease-out;
-}
-
-.show {
-	max-height: 280px;
-	transition: max-height 0.4s ease-out;
-}
-
 #search-results {
 	padding-bottom: 30px;
 }
 
+.search-result {
+	cursor: pointer;
+	padding: 20px;
+	box-sizing: border-box;
+	min-height: 140px;
+}
+
+.result-details {
+	padding: 0 18px;
+	max-height: 0;
+	overflow: hidden;
+	transition: max-height 0.4s ease;
+}
+
+.show {
+	max-height: 280px;
+	transition: max-height 0.4s ease;
+}
+
+.no-display {
+	display: none;
+}
+
+/* TOGGLE +/- */
 .tag:after {
 	content: '+';
 	font-weight: 700;
