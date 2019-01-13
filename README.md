@@ -2,9 +2,9 @@
 
 ## This project was built to learn and practice pure Javascript
 
-### It uses:
+### Made with:
+
     - ES6;
-    - Bulma CSS;
-    - FontAwesome icons
+    - Bulma CSS.
 
 ## Live: [here](https://nick-rudenko.github.io/itunes-search/)

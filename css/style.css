@@ -12,6 +12,11 @@
 	box-sizing: border-box;
 }
 
+.artwork {
+	width: 100px;
+	height: 100px;
+}
+
 #search-results {
 	padding-bottom: 30px;
 }

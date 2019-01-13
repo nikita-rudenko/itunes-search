@@ -40,12 +40,16 @@ function showResults(json) {
 	}
 
 	json.results.forEach((item, key) => {
-		searchResults.innerHTML += `<div id="item${key}" class="search-result container 
+		searchResults.innerHTML += `
+    <div id="item${key}" 
+    class="search-result container 
     ${key % 2 === 0 ? 'has-background-light' : ''} 
     rounded">
   <div class="main-info columns is-vcentered">
     <div class="column has-text-centered is-2">
-      <img src=${item.artworkUrl100} alt="cover">
+      <img class="artwork has-background-grey" src=${
+				item.artworkUrl100
+			} alt="cover">
     </div>
     <div class="column">
       ${item.artistName}
