@@ -15,7 +15,7 @@ searchInput.addEventListener('keypress', e => {
 
 function findSong() {
 	const searchQuery = searchInput.value.replace(/\s/gi, '+');
-	const url = `https://itunes.apple.com/search?term=${searchQuery}&limit=10&entity=musicTrack`;
+	const url = `https://itunes.apple.com/search?term=${searchQuery}&country=US&limit=10&entity=musicTrack`;
 
 	fetch(url)
 		.then(function(response) {
